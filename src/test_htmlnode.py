@@ -22,8 +22,8 @@ class TestTextNode(unittest.TestCase):
         node = HTMLNode("a", "click here", None, props1)
         node2 = HTMLNode("div", None, None, props2)
 
-        self.assertEqual(node.props_to_html(), 'href="https://www.google.com" target="_blank"')
-        self.assertEqual(node2.props_to_html(), 'class="thumbnail-wrapper" width="auto"')
+        self.assertEqual(node.props_to_html(), ' href="https://www.google.com" target="_blank"')
+        self.assertEqual(node2.props_to_html(), ' class="thumbnail-wrapper" width="auto"')
 
     def test_to_html(self):
         node = HTMLNode("a", "click here", None, None)
