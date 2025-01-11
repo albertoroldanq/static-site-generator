@@ -32,12 +32,12 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
     return new_nodes
 
 def split_nodes_image(old_nodes):
-    return split_non_text_nodes(old_nodes, extract_markdown_images, TextType.IMAGE)
+    return __split_non_text_nodes(old_nodes, extract_markdown_images, TextType.IMAGE)
 
 def split_nodes_link(old_nodes):
-    return split_non_text_nodes(old_nodes, extract_markdown_links, TextType.LINK)
+    return __split_non_text_nodes(old_nodes, extract_markdown_links, TextType.LINK)
 
-def split_non_text_nodes(old_nodes, extract_md_elements_func, text_type):
+def __split_non_text_nodes(old_nodes, extract_md_elements_func, text_type):
     new_nodes = []
     for node in old_nodes:
         text = node.text
