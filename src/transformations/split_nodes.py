@@ -5,6 +5,9 @@ from src.transformations.extract_markdown import extract_markdown_images, extrac
 def split_nodes_delimiter(old_nodes, delimiter, text_type):
     new_nodes = []
     for node in old_nodes:
+        if not (node.text_type == TextType.TEXT):
+            new_nodes.append(node)
+            continue
         text = node.text
         while delimiter in text:
             start_index = text.find(delimiter)
@@ -31,15 +34,21 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
     return new_nodes
 
+
 def split_nodes_image(old_nodes):
     return __split_non_text_nodes(old_nodes, extract_markdown_images, TextType.IMAGE)
+
 
 def split_nodes_link(old_nodes):
     return __split_non_text_nodes(old_nodes, extract_markdown_links, TextType.LINK)
 
+
 def __split_non_text_nodes(old_nodes, extract_md_elements_func, text_type):
     new_nodes = []
     for node in old_nodes:
+        if not (node.text_type == TextType.TEXT):
+            new_nodes.append(node)
+            continue
         text = node.text
         for elem in extract_md_elements_func(text):
             delimiter = __get_delimiter_string(text_type, elem)
@@ -58,6 +67,7 @@ def __split_non_text_nodes(old_nodes, extract_md_elements_func, text_type):
             new_nodes.append(TextNode(text, TextType.TEXT))
 
     return new_nodes
+
 
 def __get_delimiter_string(text_type, md_element):
     link_delimiter = f"[{md_element[0]}]({md_element[1]})"
