@@ -10,5 +10,5 @@ class TestExtractMarkdown(unittest.TestCase):
         self.assertEqual(extract_markdown_images(text), [("rick roll", "https://i.imgur.com/aKaOqIh.gif"), ("obi wan", "https://i.imgur.com/fJRm4Vk.jpeg")])
 
     def test_extract_links(self):
-        text = "This is text with a link [albertoroldanq](https://www.albertoroldanq.com) and [to github](https://www.github.com/albertoroldanq)"
-        self.assertEqual(extract_markdown_links(text), [("to boot dev", "https://www.boot.dev"), ("to youtube", "https://www.youtube.com/@bootdotdev")])
+        text = "This is text with a link [to albertoroldanq](https://www.albertoroldanq.com) and [to github](https://www.github.com/albertoroldanq)"
+        self.assertEqual(extract_markdown_links(text), [("to albertoroldanq", "https://www.albertoroldanq.com"), ("to github", "https://www.github.com/albertoroldanq")])
