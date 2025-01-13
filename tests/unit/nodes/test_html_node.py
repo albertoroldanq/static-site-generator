@@ -1,8 +1,10 @@
 import unittest
 
 from src.nodes.html_node import HTMLNode
+from tests.TestCase import TestCase
 
-class TestTextNode(unittest.TestCase):
+
+class TestTextNode(TestCase):
     def test_repr(self):
         node = HTMLNode("h1", "This is an h1", None, None)
         self.assertEqual(repr(node), "HTMLNode(h1, This is an h1, None, None)")

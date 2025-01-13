@@ -2,9 +2,10 @@ import unittest
 
 from src.nodes import TextNode, TextType
 from src.transformations.split_nodes import split_nodes_delimiter, split_nodes_image, split_nodes_link
+from tests.TestCase import TestCase
 
 
-class TestSplitNodes(unittest.TestCase):
+class TestSplitNodes(TestCase):
 
     def test_invalid_markdown_text(self):
         node = TextNode("Hello **bold text World invalid", TextType.TEXT)
@@ -104,5 +105,6 @@ class TestSplitNodes(unittest.TestCase):
 
         self.assertEqual(expected_results, result)
 
-
+if __name__ == "__main__":
+    unittest.main()
 

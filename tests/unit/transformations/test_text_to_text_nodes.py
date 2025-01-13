@@ -1,10 +1,11 @@
 import unittest
 
 from src.transformations.text_to_text_nodes import text_to_text_nodes
-from tests.unit.text_to_text_node_data import expected_results
+from tests.TestCase import TestCase
+from tests.unit.transformations.text_to_text_node_data import expected_results
 
 
-class TestTextToTextNodes(unittest.TestCase):
+class TestTextToTextNodes(TestCase):
 
     def test_text_to_test_nodes(self):
 
@@ -25,3 +26,6 @@ class TestTextToTextNodes(unittest.TestCase):
             text_to_text_nodes(invalid_md_text)
             self.assertIn("Invalid markdown detected", str(context.exception))
         self.assertEqual(exception_message, str(context.exception))
+
+if __name__ == "__main__":
+    unittest.main()

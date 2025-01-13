@@ -2,9 +2,10 @@ import unittest
 
 from src.nodes.leaf_node import LeafNode
 from src.nodes.parent_node import ParentNode
+from tests.TestCase import TestCase
 
 
-class TestTextNode(unittest.TestCase):
+class TestTextNode(TestCase):
     def test_to_html_with_leaf_children(self):
         node = ParentNode(
             "p",

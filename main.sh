@@ -1,1 +1,1 @@
-python3 src/main.py
+PYTHONPATH="$(pwd)" python3 src/main.py

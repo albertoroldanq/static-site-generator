@@ -2,9 +2,10 @@ import unittest
 
 from src.nodes import TextNode, TextType
 from src.transformations.text_to_html import text_node_to_html_node
+from tests.TestCase import TestCase
 
 
-class TestTextToHtml(unittest.TestCase):
+class TestTextToHtml(TestCase):
 
     def test_no_text_type_match(self):
         text_node = TextNode("Bold text", "incompatible type")
@@ -51,3 +52,6 @@ class TestTextToHtml(unittest.TestCase):
         self.assertEqual(node.value, '')
         self.assertEqual(node.children, None)
         self.assertEqual(node.props, {'src': 'https://test.com', 'alt': 'Image alt text'})
+
+if __name__ == "__main__":
+    unittest.main()

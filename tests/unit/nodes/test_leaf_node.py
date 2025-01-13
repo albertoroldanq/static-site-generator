@@ -1,9 +1,10 @@
 import unittest
 
 from src.nodes.leaf_node import LeafNode
+from tests.TestCase import TestCase
 
 
-class TestTextNode(unittest.TestCase):
+class TestTextNode(TestCase):
     def test_to_html(self):
         props1 = {
             "href": "https://www.google.com",
