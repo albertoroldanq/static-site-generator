@@ -76,7 +76,6 @@ def expected_results():
             TextNode("link", TextType.LINK, "https://albertoroldanq.com"),
         ],
         text7: [
-            TextNode(" ", TextType.TEXT),
             TextNode("code block", TextType.CODE),
             TextNode(" ", TextType.TEXT),
             TextNode("code block", TextType.CODE),

@@ -5,8 +5,9 @@ from src.nodes import TextNode, TextType
 from src.transformations.split_nodes import split_nodes_delimiter, split_nodes_image, split_nodes_link
 
 def text_to_text_nodes(text):
-    nodes = [TextNode(text, TextType.TEXT)]
 
+    text = text.strip()
+    nodes = [TextNode(text, TextType.TEXT)]
     text_delimiters = {
         TextType.BOLD: '**',
         TextType.ITALIC: '*',

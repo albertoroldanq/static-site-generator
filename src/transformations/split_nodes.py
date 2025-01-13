@@ -15,7 +15,7 @@ def split_nodes_delimiter(old_nodes, delimiter, text_type):
 
             if end_index == -1:
                 raise ValueError(
-                    f"Invalid Markdown syntax: Unmatched delimiter '{delimiter}' found in input text."
+                    f"Invalid Markdown syntax: Unmatched delimiter '{delimiter}' found in input text: {text}"
                 )
 
             before_text = text[:start_index]

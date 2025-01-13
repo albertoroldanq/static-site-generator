@@ -9,10 +9,10 @@ class TestTextToTextNodes(TestCase):
 
     def test_text_to_test_nodes(self):
 
-        results = expected_results()
+        expected = expected_results()
 
-        for text in results:
-            expected_result = results[text]
+        for text in expected:
+            expected_result = expected[text]
             result = text_to_text_nodes(text)
             self.assertEqual(expected_result, result)
 
@@ -20,7 +20,7 @@ class TestTextToTextNodes(TestCase):
 
         invalid_md_text = " **bold*"
 
-        exception_message = "[ERROR processing text in src.transformations.text_to_text_nodes] Invalid Markdown syntax: Unmatched delimiter '**' found in input text."
+        exception_message = "[ERROR processing text in src.transformations.text_to_text_nodes] Invalid Markdown syntax: Unmatched delimiter '**' found in input text: **bold*"
 
         with self.assertRaises(Exception) as context:
             text_to_text_nodes(invalid_md_text)
