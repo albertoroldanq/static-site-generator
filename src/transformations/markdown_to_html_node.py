@@ -1,6 +1,6 @@
 import logging
 
-from src.logger.logger import log
+from src.logger.logger import error
 from src.nodes import HTMLNode, ParentNode
 from src.transformations.markdown_to_blocks import markdown_to_blocks, block_to_block_type, BlockType
 from src.transformations.text_to_html import text_node_to_html_node
@@ -35,7 +35,7 @@ def __markdown_block_to_html(block):
             case _:
                 return HTMLNode(None, block)
     except ValueError as e:
-        log(logging.ERROR, f"Invalid markdown format. Exception: {str(e)}")
+        error(f"Invalid markdown format. Exception: {str(e)}")
         raise ValueError('Invalid markdown format')
 
 

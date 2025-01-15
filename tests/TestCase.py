@@ -1,16 +1,18 @@
 import logging
 import os
+import tempfile
 import unittest
 from datetime import datetime
 
+from config.config import LOGS_DIR
+
 
 def _setup_logger():
-    script_directory = os.path.dirname(os.path.abspath(__file__))
-    log_directory = os.path.abspath(script_directory + '../../storage/logs')
-    log_file_path = os.path.join(log_directory, datetime.now().strftime("%Y-%m-%d") + '.log')
+    logs_dir = LOGS_DIR
+    log_file_path = os.path.join(logs_dir, datetime.now().strftime("%Y-%m-%d") + '.log')
 
-    if not os.path.exists(script_directory):
-        os.makedirs(script_directory)
+    if not os.path.exists(logs_dir):
+        os.makedirs(logs_dir)
 
     logging.basicConfig(
         level=logging.INFO,
@@ -21,4 +23,21 @@ def _setup_logger():
 
 
 class TestCase(unittest.TestCase):
-    _setup_logger()
+
+    def setUp(self):
+        self.test_dir = tempfile.mkdtemp()
+        self.storage_dir = os.path.join(self.test_dir, "storage")
+        self.logs_dir = os.path.join(self.storage_dir, "logs")
+        self.log_file_path = os.path.join(self.logs_dir, datetime.now().strftime("%Y-%m-%d") + '.log')
+
+        os.mkdir(self.storage_dir)
+        os.mkdir(self.logs_dir)
+
+
+
+        logging.basicConfig(
+            level=logging.INFO,
+            format='[TEST] - %(asctime)s - %(levelname)s - %(message)s',
+            filename=self.log_file_path,
+            filemode='a'
+        )

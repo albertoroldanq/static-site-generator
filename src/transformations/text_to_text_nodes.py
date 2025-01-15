@@ -1,6 +1,7 @@
 import logging
 
-from src.logger.logger import log
+from src.logger import logger
+from src.logger.logger import error
 from src.nodes import TextNode, TextType
 from src.transformations.split_nodes import split_nodes_delimiter, split_nodes_image, split_nodes_link
 
@@ -28,7 +29,7 @@ def text_to_text_nodes(text):
         for text_type in non_text_delimiters:
             processed_nodes = non_text_delimiters[text_type](processed_nodes)
     except ValueError as e:
-        log(logging.ERROR,f"[{__name__}] {str(e)}" )
+        error(f"[{__name__}] {str(e)}" )
         raise ValueError(f"[ERROR processing text in {__name__}] {str(e)}")
 
     return processed_nodes
