@@ -6,13 +6,11 @@ from src.logger.logger import debug, error
 
 
 def override_directory(source_dir, destination_dir):
-
-    dest_rel = os.path.relpath(destination_dir, PROJECT_ROOT)
-
     if not os.path.exists(source_dir):
         error("Directory not found: " + source_dir)
         raise ValueError("Directory not found: " + source_dir)
 
+    dest_rel = os.path.relpath(destination_dir, PROJECT_ROOT)
     debug(f"Overriding /{dest_rel} directory in process...")
 
     if os.path.exists(destination_dir):
@@ -24,15 +22,15 @@ def override_directory(source_dir, destination_dir):
         debug(f"Directory successfully CREATED: /{dest_rel}")
 
     __copy_from_source_to_destination_directory(source_dir, destination_dir)
+    debug(f"Main directory and content successfully GENERATED: /{dest_rel}")
 
 
 def __copy_from_source_to_destination_directory(source_dir, destination_dir):
     source_rel = os.path.relpath(source_dir, PROJECT_ROOT)
     dest_rel = os.path.relpath(destination_dir, PROJECT_ROOT)
+    debug(f"Attempting to clone /{source_rel} content into /{dest_rel}")
 
     source_entries = os.listdir(source_dir)
-
-    debug(f"Attempting to clone /{source_rel} content into /{dest_rel}")
     for entry in source_entries:
         source_path = os.path.join(source_dir, entry)
         source_path_rel = os.path.relpath(source_path, PROJECT_ROOT)

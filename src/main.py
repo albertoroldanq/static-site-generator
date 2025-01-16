@@ -3,7 +3,7 @@ import os.path
 from config.config import STATIC_DIR, PUBLIC_DIR
 from config.log_config import setup_logger
 from src.nodes.text_node import TextNode, TextType
-from src.override_directory import override_directory
+from src.site_load.override_directory import override_directory
 
 
 BASE_DIR =  os.path.dirname(os.path.dirname(os.path.abspath(__file__)))

@@ -3,7 +3,7 @@ import shutil
 import tempfile
 import unittest
 
-from src.override_directory import override_directory
+from src.site_load.override_directory import override_directory
 from tests.TestCase import TestCase
 
 
