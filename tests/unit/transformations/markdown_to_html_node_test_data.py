@@ -55,7 +55,7 @@ def ordered_list_data():
 
 
 def quote_data():
-    return ParentNode("quote",
+    return ParentNode("blockquote",
                       [
                           HTMLNode(None, "This is a quote with a ", None, None),
                           HTMLNode("a", "link", None, {"href": "https://test.com"})

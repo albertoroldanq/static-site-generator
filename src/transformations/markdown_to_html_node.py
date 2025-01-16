@@ -13,7 +13,7 @@ def markdown_to_html_node(markdown):
     for block in blocks:
         html_blocks.append(__markdown_block_to_html(block))
 
-    return HTMLNode('div', None, html_blocks)
+    return ParentNode('div', html_blocks)
 
 
 def __markdown_block_to_html(block):
@@ -40,13 +40,18 @@ def __markdown_block_to_html(block):
 
 
 def __markdown_heading_to_html(block):
-    text = block.split(" ", 1)
-    count_hashes = len(text[0])
-    tag = f"h{count_hashes}"
-
-    children = __text_to_children_nodes(text[1])
-
+    heading = block.split(" ", 1)
+    tag = get_heading_tag(heading)
+    content = get_heading_content(heading)
+    children = __text_to_children_nodes(content)
     return ParentNode(tag, children)
+
+def get_heading_tag(heading):
+    return f"h{len(heading[0])}"
+
+def get_heading_content(heading):
+    return heading[1].strip()
+
 
 
 def __markdown_paragraph_to_html(text):
@@ -64,7 +69,7 @@ def __markdown_quote_to_html(block):
     text = __remove_initial_markdown_character(block)
     children = __text_to_children_nodes(text)
 
-    return ParentNode('quote', children)
+    return ParentNode('blockquote', children)
 
 def __markdown_list_to_html(block, list_type):
     text = __remove_list_markdown(block)
