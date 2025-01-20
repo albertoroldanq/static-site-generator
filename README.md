@@ -7,7 +7,9 @@
 
 This is a simple static site generator that I wrote in Python to practise Functional programming in Python.
 
-It takes the files from [/static](static) into an auto generated /public directory, and it generates html files from the [/content](content) directory
+It generates a static site from Markdown files. Keeping the directory structure of the `content` directory.
+- Assets are copied from the `/static` directory to a `/public` directory.
+- Html files are generated in a `/public` directory from the Markdown files in [/content](content) directory
 
 To run the project, you can use the following command:
 
@@ -20,3 +22,14 @@ To run the tests:
 ```bash
 ./test.sh
 ``` 
+
+
+## Markdown syntax accepted
+Each markdown file MUST have a h1 heading and the following Markdown syntax is accepted in the content files:
+- headings
+- bold
+- italic
+- code and code blocks
+- quotes
+- Links
+- Images
