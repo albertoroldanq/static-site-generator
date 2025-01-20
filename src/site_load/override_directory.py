@@ -6,6 +6,7 @@ from src.logger.logger import debug, error
 
 
 def override_directory(source_dir, destination_dir):
+    debug(__name__)
     if not os.path.exists(source_dir):
         error("Directory not found: " + source_dir)
         raise ValueError("Directory not found: " + source_dir)

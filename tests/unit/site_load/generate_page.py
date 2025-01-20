@@ -1,7 +1,8 @@
 import os.path
+import tempfile
 import unittest
 
-from src.site_load.generate_page import extract_title
+from src.site_load.generate_page import extract_title, generate_page, generate_pages_recursive
 from tests.TestCase import TestCase
 
 
@@ -29,4 +30,50 @@ class TestGeneratePage(TestCase):
         with self.assertRaises(Exception) as context:
             extract_title(md_content)
         self.assertEqual("No h1 found in markdown document", str(context.exception))
+
+
+    def test_generate_page(self):
+        test_content = "# Random Title"
+        test_template = "<html><title>{{ Title }}<title/><body>{{ Content }}</body></html>"
+
+        with tempfile.TemporaryDirectory() as content_dir:
+            index_md_path = os.path.join(content_dir, "index.md")
+            with open(index_md_path, "w") as f:
+                f.write(test_content)
+
+            with tempfile.TemporaryDirectory() as template_dir:
+                template_html_path = os.path.join(template_dir, "template.html")
+                with open(template_html_path, "w") as f:
+                    f.write(test_template)
+
+                with tempfile.TemporaryDirectory() as output_dir:
+                    index_html_path = os.path.join(output_dir, "index.html")
+                    result = generate_page(index_md_path, template_html_path, index_html_path)
+
+                    with open(index_html_path) as f:
+                        html = f.read()
+                        self.assertEqual("<html><title>Random Title<title/><body><div><h1>Random Title</h1></div></body></html>", html)
+
+
+    def test_generate_pages_recursive(self):
+        with tempfile.TemporaryDirectory() as content_dir:
+            with tempfile.TemporaryDirectory() as output_dir:
+                os.makedirs(os.path.join(content_dir, "subfolder"))
+
+                with open(os.path.join(content_dir, "index.md"), "w") as f:
+                    f.write("# Main Page")
+                with open(os.path.join(content_dir, "subfolder/page.md"), "w") as f:
+                    f.write("# Sub Page")
+
+                template_path = os.path.join(content_dir, "template.html")
+                with open(template_path, "w") as f:
+                    f.write("<html><body>{content}</body></html>")
+
+                generate_pages_recursive(content_dir, template_path, output_dir)
+
+                output_subfolder = os.path.join(output_dir, "subfolder")
+
+                assert os.path.exists(os.path.join(output_dir, "index.html"))
+                assert os.path.exists(os.path.join(output_subfolder, "page.html"))
+
 
